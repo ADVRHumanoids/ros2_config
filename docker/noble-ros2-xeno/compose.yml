@@ -1,0 +1,20 @@
+services:
+  dev:
+    build: 
+      context: ../..
+      dockerfile: docker/noble-ros2-xeno/Dockerfile
+      args:
+        - ROS2_IP
+        - USER_ID
+    extends:
+      file: ../noble-ros2/compose.yml
+      service: dev
+    cap_add:
+      - ALL
+    volumes:
+      - ./data:/home/user/data:rw  # persistent data folder
+      - /dev:/dev
+      - /usr/lib/modules:/usr/lib/modules
+      
+
+

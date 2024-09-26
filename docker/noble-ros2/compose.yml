@@ -1,0 +1,32 @@
+services:
+  dev:
+    build: 
+      dockerfile: docker/noble-ros2/Dockerfile
+      context: ../..
+      args:
+        - USER_ID
+        - ROS2_IP
+    stdin_open: true
+    tty: true 
+    privileged: true
+    entrypoint: /bin/bash
+    network_mode: host
+    cap_add:
+      - ALL
+    restart: always
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw  # x11
+      - ~/.ssh:/home/user/.ssh  # ssh
+      - ./data:/home/user/data:rw  # persistent data folder
+      - /dev:/dev
+      - /usr/lib/modules:/usr/lib/modules
+      - type: bind
+        source: ../netrc
+        target: /home/user/.netrc
+    environment:
+      - TERM=xterm-256color
+      - DISPLAY
+      - HHCM_FOREST_CLONE_DEFAULT_PROTO=https
+      
+
+

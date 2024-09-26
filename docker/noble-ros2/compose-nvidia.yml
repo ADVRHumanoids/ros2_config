@@ -1,0 +1,17 @@
+services:
+  dev:
+    extends:
+      file: compose.yml
+      service: dev
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  
+
+
