@@ -8,7 +8,7 @@ Configuration files and docker containers for ros2
     ```bash
     cd docker/noble-ros2  # or noble-ros2-xeno for RT
     docker compose build
-    source setup.bash  # for the "ros2" alias (or setup-nvidia.bash )
+    source setup.bash  # for the "ros2" alias (or setup-nvidia.bash ), add to .bashrc for convenience
     ```
 3. **Bootstrap:** this will compile a forest_ws with all required software inside the container; the workspace is inside a mounted directory for persistent storage over container restart
    ```bash
