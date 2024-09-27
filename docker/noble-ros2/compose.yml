@@ -14,12 +14,12 @@ services:
     cap_add:
       - ALL
     restart: always
+    ulimits: 
+      core: -1
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw  # x11
       - ~/.ssh:/home/user/.ssh  # ssh
       - ./data:/home/user/data:rw  # persistent data folder
-      - /dev:/dev
-      - /usr/lib/modules:/usr/lib/modules
       - type: bind
         source: ../netrc
         target: /home/user/.netrc

@@ -4,6 +4,14 @@ ARG ROS2_IP
 # make arg ROS2_IP mandatory
 RUN test -n "$ROS2_IP" || (echo "ROS2_IP argument is mandatory!! You can set it as env variable before building" && false)
 
+# install xenomai
+ENV HHCM_FOREST_CLONE_DEFAULT_PROTO=https
+RUN mkdir xeno_ws && cd xeno_ws && \
+    forest init && \
+    forest add-recipes git@github.com:advrhumanoids/multidof_recipes.git -t ros2 && \
+    forest grow Xenomai -j8 -v && \
+    cd .. && rm -rf xeno_ws
+
 # xenomai from regular user
 RUN sudo groupadd -f xenomai -g 1001
 RUN sudo usermod -a -G xenomai user
